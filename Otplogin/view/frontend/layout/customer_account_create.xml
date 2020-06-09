@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cinovic Technologies LLP.
+ *
+ * @category  Cinovic
+ * @package   Cinovic_Otplogin
+ * @author    Cinovic Technologies LLP
+ * @copyright Copyright (c) Cinovic Technologies LLP (https://cinovic.com)
+ * @license   https://store.cinovic.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+       <css src="Cinovic_Otplogin::css/custom.css"/>
+       <css src="Cinovic_Otplogin::css/intlTelInput.css"/>
+       <script src="Cinovic_Otplogin::js/utils.js"/>
+   </head>
+    <body>
+        <referenceContainer name="form.additional.info">
+            <block class="Magento\Framework\View\Element\Template" ifconfig="cinovic_otplogin/general/enabled" name="form_additional_info_customer" template="Cinovic_Otplogin::form/mobileregister.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cinovic Technologies LLP.
+ *
+ * @category  Cinovic
+ * @package   Cinovic_Otplogin
+ * @author    Cinovic Technologies LLP
+ * @copyright Copyright (c) Cinovic Technologies LLP (https://cinovic.com)
+ * @license   https://store.cinovic.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+       <css src="Cinovic_Otplogin::css/intlTelInput.css"/>
+       <css src="Cinovic_Otplogin::css/custom.css"/>
+       <script src="Cinovic_Otplogin::js/utils.js"/>
+   </head>
+    <body>
+        <referenceBlock name="register-link">
+            <arguments>
+                <argument name="class" xsi:type="string">customer-register-link</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="authorization-link-login">
+            <arguments>
+                <argument name="class" xsi:type="string">customer-login-link</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block class="Cinovic\Otplogin\Block\Form\Login" ifconfig="cinovic_otplogin/general/enabled" name="customer-popup-login" template="Cinovic_Otplogin::login.phtml" />
+            <block class="Cinovic\Otplogin\Block\Form\Register" ifconfig="cinovic_otplogin/general/enabled" name="customer-popup-register" template="Cinovic_Otplogin::register.phtml" />
+            <block class="Magento\Framework\View\Element\Template" ifconfig="cinovic_otplogin/general/enabled" name="customer-popup-otp" template="Cinovic_Otplogin::otp.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,155 @@
+<?php
+
+/**
+ * Cinovic Technologies LLP.
+ *
+ * @category  Cinovic
+ * @package   Cinovic_Otplogin
+ * @author    Cinovic Technologies LLP
+ * @copyright Copyright (c) Cinovic Technologies LLP (https://cinovic.com)
+ * @license   https://store.cinovic.com/license.html
+ */
+
+/** @var \Cinovic\Otplogin\Block\Form\Login $block */
+?>
+<?php if (!$block->customerIsAlreadyLoggedIn()) : ?>
+    <div id="customer-popup-login" class="customer-popup-login tab-content">
+        <div class="col-md-6 image">
+            <img src="<?php echo $this->getViewFileUrl('Cinovic_Otplogin::images/mobile.jpg'); ?>">
+        </div>
+        <div class="col-md-6">
+            <div class="tabs">
+                <div class="tab">
+                    <label class="withmobile" style="border-bottom:2px solid lightslategray;">Signin with Mobile</label>
+                </div>
+                <div class="tab">
+                    <label class="withemail">Signin with Email</label>
+                </div>
+            </div>
+            <div class="block block-customer-login">
+                <div class="block-content" aria-labelledby="block-customer-popup-login-heading">
+                    <form class="form form-login  custom-login" action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" id="customer-popup-login-form" data-mage-init='{"validation":{}}' style="display:none;">
+                        <?php echo $block->getBlockHtml('formkey'); ?>
+                        <input type="hidden" name="redirect_url" value="<?php echo $this->getUrl('otplogin/account/otp'); ?>" />
+                        <fieldset class="fieldset login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                            <div class="messages"></div>
+                            <div class="field email required">
+                                <div class="control">
+                                    <input name="username" placeholder="Email" value="" id="email-login" type="email" class="input-text" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                                </div>
+                            </div>
+                            <div class="field password required">
+                                <div class="control">
+                                    <input name="password" placeholder="Password" type="password" autocomplete="off" class="input-text" id="pass-login" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true}">
+                                </div>
+                            </div>
+                            <div class="actions-toolbar">
+                                <div class="primary"><button type="submit" class="action login primary" name="send" id="send2-login"><span><?php /* @escapeNotVerified */ echo __('Sign In') ?></span></button></div>
+                                <?php if ($block->getRegistration()->isAllowed()) : ?>
+                                    <div class="or-another-selection"><?php echo __('or'); ?></div>
+                                    <div class="secondary"><a class="action remind" href="<?php /* @escapeNotVerified */ echo $block->getCustomerRegistrationUrl() ?>" id="customer-popup-registration"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></a></div>
+                                <?php endif; ?>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="otpmessages">
+                    <form class="form form-login" id="otp-form" data-mage-init='{"validation":{}}'>
+                        <?= $block->getBlockHtml('formkey') ?>
+                        <fieldset class="fieldset login" data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>">
+                            <div class="field mobile required">
+                                <div class="control">
+                                    <input type="tel" placeholder="Mobile Number" name="mobile_number" alt="number" id="number" class="validate-length minimum-length-10 input-text" data-validate="{required:true}">
+                                </div>
+                            </div>
+                            <?= $block->getChildHtml('form_additional_info') ?>
+                            <div class="actions-toolbar">
+                                <div class="primary"><button type="button" class="action login primary sendotp" name="send" id="send2"><span><?= $block->escapeHtml(__('Send OTP')) ?></span></button></div>
+                                <?php if ($block->getRegistration()->isAllowed()) : ?>
+                                    <div class="or-another-selection"><?php echo __('or'); ?></div>
+                                    <div class="secondary"><a class="action remind" href="<?php /* @escapeNotVerified */ echo $block->getCustomerRegistrationUrl() ?>" id="customer-popup-registration"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></a></div>
+                                <?php endif; ?>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="secondary"><a class="action forgot-password" id="customer-popup-forgot"><span><?php /* @escapeNotVerified */ echo __('Forgot Password?') ?></span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require(["jquery"], function($) {
+            $('.forgot-password').on('click', function() {
+                $('.withmobile').css('border-bottom', 'none');
+                $('.withemail').css('border-bottom', 'none');
+                $('.custom-login').css('display', 'none');
+                $('.forgot-password').css('display', 'none');
+                $('.otpmessages').css('display', 'block');
+            });
+            $('.withemail').on('click', function() {
+                $('.forgot-password').css('display', 'block');
+                $('.withmobile').css('border-bottom', 'none');
+                $('.withemail').css('border-bottom', '2px solid lightslategray');
+                $('.otpmessages').css('display', 'none');
+                $('.custom-login').css('display', 'block');
+            });
+            $('.withmobile').on('click', function() {
+                $('.forgot-password').css('display', 'block');
+                $('.withemail').css('border-bottom', 'none');
+                $('.withmobile').css('border-bottom', '2px solid lightslategray');
+                $('.otpmessages').css('display', 'block');
+                $('.custom-login').css('display', 'none');
+            });
+            $('.sendotp').on('click', function() {
+                var customurl = "<?php echo $block->getUrl('otplogin/account/otploginpost') ?>";
+                if (jQuery('#otp-form').valid()) {
+                    $('body').loader().loader('show');
+                    $.ajax({
+                        url: customurl,
+                        data: $('#otp-form').serialize(),
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(response) {
+                            $('body').loader().loader('hide');
+                            if (response.errors) {
+                                $('.modal-header').css('display', 'block');
+                                $(".message").remove();
+                                $('<div class="message message-error error"><div>An error occurred, please try again later.</div></div>').appendTo('.otpmessages');
+                            } else {
+                                $(".message").remove();
+                                $('#customer-popup-login').modal('closeModal');
+                                $('#customer-popup-otp').modal('openModal');
+                                $('<div class="message message-success success"><div>' + response.message + '</div></div>').appendTo('.otpmessages');
+                            }
+                        },
+                        error: function() {
+                            $('body').loader().loader('hide');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script type="text/x-magento-init">
+        {
+                "#customer-popup-login": {
+                    "Cinovic_Otplogin/js/action/customer-authentication-popup": {
+                        "popupTitle": "<?php /* @escapeNotVerified */ echo __('Sign In') ?>",
+                        "innerWidth": "400"
+                    }
+                }
+            }
+        </script>
+    </div>
+<?php endif; ?>
+<script type="application/javascript">
+    require([
+        'jquery',
+        'intlTelInput'
+    ], function($) {
+        $("#number").intlTelInput(<?php echo $block->getPhoneconfig(); ?>)
+    });
+</script>

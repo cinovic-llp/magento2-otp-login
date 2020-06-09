@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * Cinovic Technologies LLP.
+ *
+ * @category  Cinovic
+ * @package   Cinovic_Otplogin
+ * @author    Cinovic Technologies LLP
+ * @copyright Copyright (c) Cinovic Technologies LLP (https://cinovic.com)
+ * @license   https://store.cinovic.com/license.html
+ */
+
+/** @var \Cinovic\Otplogin\Block\Form\Register $block */
+?>
+<?php if (!$block->customerIsAlreadyLoggedIn() && $block->getRegistration()->isAllowed()) : ?>
+    <div id="customer-popup-register" class="customer-popup-register">
+        <div class="col-md-6 image">
+            <img src="<?php echo $this->getViewFileUrl('Cinovic_Otplogin::images/mobile.jpg'); ?>">
+        </div>
+        <form class="form-create-account col-md-6" action="<?php echo $block->getUrl('otplogin/account/otploginpost') ?>" method="post" id="customer-popup-form-register" enctype="multipart/form-data" autocomplete="off" data-mage-init='{"validation":{}}'>
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <input type="hidden" name="redirect_url" value="<?php echo $this->getUrl('otplogin/account/otp'); ?>" />
+            <div class="messages"></div>
+            <fieldset class="fieldset create account" data-hasrequired="<?php /* @escapeNotVerified */ echo __('*All Fields Required') ?>">
+                <div class="field required">
+                    <div class="control">
+                        <input type="text" placeholder="First Name"  name="firstname" class="input-text" data-validate="{required:true}">
+                    </div>
+                </div>
+                <div class="field required">
+                    <div class="control">
+                        <input type="text" placeholder="Last Name" name="lastname" class="input-text" data-validate="{required:true}">
+                    </div>
+                </div>
+                <div class="field required">
+                    <div class="control">
+                        <input type="email" name="email" placeholder="Email Address" autocomplete="email" id="popup-email_address" value="" class="input-text" data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="field required">
+                    <div class="control">
+                        <input type="tel" name="mobile_number" placeholder="Mobile Number" id="phone" value="" class="input-text" data-validate="{required:true}">
+                    </div>
+                </div>
+                <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
+                    <div class="control">
+                        <input type="password" placeholder="Password" name="password" id="password" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" class="input-text" data-password-min-length="<?php echo $block->escapeHtml($block->getMinimumPasswordLength()) ?>" data-password-min-character-sets="<?php echo $block->escapeHtml($block->getRequiredCharacterClassesNumber()) ?>" data-validate="{required:true, 'validate-customer-password':true}" autocomplete="off">
+                        <div id="password-strength-meter-container" data-role="password-strength-meter">
+                            <div id="password-strength-meter" class="password-strength-meter">
+                                <?php /* @escapeNotVerified */ echo __('Password Strength'); ?>:
+                                <span id="password-strength-meter-label" data-role="password-strength-meter-label">
+                                    <?php /* @escapeNotVerified */ echo __('No Password'); ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></button>
+                </div>
+                <div class="or-another-selection"><?php echo __('or'); ?></div>
+                <div class="secondary"><a class="action remind" href="<?php /* @escapeNotVerified */ echo $block->getBackUrl() ?>" id="customer-popup-sign-in"><span><?php /* @escapeNotVerified */ echo __('Sign In') ?></span></a></div>
+            </div>
+        </form>
+        <script type="text/x-magento-init">
+            {
+                "#customer-popup-register": {
+                    "Cinovic_Otplogin/js/action/customer-authentication-popup": {
+                        "popupTitle": "<?php /* @escapeNotVerified */ echo __('Create an Account'); ?>",
+                        "innerWidth": "600"
+                    }
+                }
+            }
+        </script>
+    </div>
+<?php endif; ?>
+<script type="application/javascript">
+    require([
+        'jquery',
+        'intlTelInput'
+    ], function($) {
+        $("#phone").intlTelInput(<?php echo $block->getPhoneconfig(); ?>)
+        $("#phone1").intlTelInput(<?php echo $block->getPhoneconfig(); ?>)
+
+    });
+</script>

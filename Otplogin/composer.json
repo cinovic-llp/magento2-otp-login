@@ -1,0 +1,26 @@
+{
+    "name": "cinovic/otplogin",
+    "description": "Magento2 Login with OTP",
+    "require": {
+        "twilio/sdk": "^6.6"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "authors": [
+        {
+          "name": "Cinovic Team",
+          "email": "contact@cinovic.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Cinovic\\Otplogin\\": ""
+        }
+    }
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * Cinovic Technologies LLP.
+ *
+ * @category  Cinovic
+ * @package   Cinovic_Otplogin
+ * @author    Cinovic Technologies LLP
+ * @copyright Copyright (c) Cinovic Technologies LLP (https://cinovic.com)
+ * @license   https://store.cinovic.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+    <tab id="cinovic" translate="label" sortOrder="200">
+            <label>cinovic</label>
+        </tab>
+        <section id="cinovic_otplogin" translate="label" sortOrder="200"
+                showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>OTP Login</label>
+            <tab>cinovic</tab>
+            <resource>Cinovic_Otplogin::settings</resource>
+            <group id="general" translate="label" sortOrder="10"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" translate="label,tooltip" sortOrder="10" type="select"
+                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Is enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="otp_type" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>OTP Type</label>
+                    <source_model>Cinovic\Otplogin\Model\Source\Otptype</source_model>
+                </field>
+                <field id="otp_length" translate="label comment" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>OTP Length</label>
+                </field>
+                 <field id="expire_time" translate="label comment" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Expire Time</label>
+                    <comment>Time In Seconds.</comment>
+                </field>
+            </group>
+            <group id="api_configuration" translate="label" sortOrder="11"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Api Configuration</label>
+                <field id="sender_id" translate="label comment" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender ID</label>
+                </field>
+                <field id="authorization_key" translate="label comment" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Authorization Key</label>
+                </field>
+                  <field id="mobile_number" translate="label comment" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Mobile Number</label>
+                </field>
+            </group>
+             <group id="generaltelephone" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Country Configuration</label>
+                <field id="allow" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,90 @@
+<div id="customer-popup-otp" class="customer-popup-otp">
+    <div class="col-md-6 image">
+    <img src="<?php echo $this->getViewFileUrl('Cinovic_Otplogin::images/mobile.jpg'); ?>">
+    </div>
+    <div class="col-md-6">
+        <div class="otpmessages"></div>
+        <form class="form" method="post" id="form-otpsend" data-mage-init='{"validation":{}}'>
+            <input type="hidden" name="redirect_url" value="<?php echo $this->getUrl('/'); ?>" />
+            <fieldset class="fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <div class="field otp required">
+                    <div class="control">
+                        <input type="password" placeholder="Enter OTP" name="otp" alt="otp" id="otp" class="input-text" data-validate="{required:true}">
+                    </div>
+                </div>
+                <?= $block->getChildHtml('form_additional_info') ?>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="button" class="action submit sendotpsubmit primary"><span><?= $block->escapeHtml(__('Enter OTP')) ?></span></button>
+                </div>
+                <div class="secondary">
+                    <a name="email" class="resendotp"><span><?= $block->escapeHtml(__('Resend OTP')) ?></span></a>
+                </div>
+               </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["jquery"], function($) {
+        $('.sendotpsubmit').on('click', function() {
+            if ($('#form-otpsend').valid()) {
+                $('body').loader().loader('show');
+                $.ajax({
+                    url: "<?php echo $block->getUrl('otplogin/account/otppost') ?>",
+                    data: $('#form-otpsend').serialize(),
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        $('body').loader().loader('hide');
+                        if (response.errors) {
+                            $(".message").remove();
+                            $('<div class="message message-error error"><div>' + response.message + '</div></div>').appendTo('.otpmessages');
+                        } else {
+                            $(".message").remove();
+                            $('<div class="message message-success success"><div>' + response.message + '</div></div>').appendTo('.otpmessages');
+                            var url = $('#form-otpsend').find('input[name="redirect_url"]').val();
+                            window.location.href = url;
+                        }
+                    },
+                    error: function() {
+                        $('body').loader().loader('hide');
+                        $(".message").remove();
+                        $('<div class="message message-error error"><div>An error occurred, please try again later.</div></div>').appendTo('.otpmessages');
+                    }
+                });
+            }
+        });
+
+        $('.resendotp').on('click', function() {
+            var customurl = "<?php echo $block->getUrl('otplogin/account/resendotp') ?>";
+            $('body').loader().loader('show');
+            $.ajax({
+                url: customurl,
+                type: 'POST',
+                dataType: 'json',
+                success: function(response) {
+                    $(".message").remove();
+                    $('body').loader().loader('hide');
+                    $('<div class="message message-success success"><div>' + response.message + '</div></div>').appendTo('.otpmessages');
+                },
+                error: function() {
+                    $('body').loader().loader('hide');
+                    $(".message").remove();
+                    $('<div class="message message-error error"><div>An error occurred, please try again later.</div></div>').appendTo('.otpmessages');
+                }
+            });
+        });
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+                "#customer-popup-otp": {
+                    "Cinovic_Otplogin/js/action/customer-authentication-popup": {
+                        "popupTitle": "<?php /* @escapeNotVerified */ echo __('Create an Account'); ?>",
+                        "innerWidth": "600"
+                    }
+                }
+            }
+        </script>
+</div>

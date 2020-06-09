@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Cinovic Technologies LLP.
+ *
+ * @category  Cinovic
+ * @package   Cinovic_Otplogin
+ * @author    Cinovic Technologies LLP
+ * @copyright Copyright (c) Cinovic Technologies LLP (https://cinovic.com)
+ * @license   https://store.cinovic.com/license.html
+ */
+
+/**
+ * Create account form template
+ *
+ * @var $block \Magento\Customer\Block\Form\Register
+ */
+?>
+<div class="field required">
+    <label for="popup-mobile" class="label"><span><?php /* @escapeNotVerified */ echo __('Mobile Number') ?></span></label>
+    <div class="control">
+        <input type="tel" name="mobile_number" id="phone1" value="" title="<?php /* @escapeNotVerified */ echo __('Mobile Number') ?>" class="validate-length minimum-length-10 input-text" data-validate="{required:true}">
+        <div class="field note"><?php /* @escapeNotVerified */ echo __('Enter Mobile With Country Code.') ?></div>
+
+    </div>
+</div>

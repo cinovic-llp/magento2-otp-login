@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+  <default>
+      <cinovic_otplogin>
+          <generaltelephone>
+              <allow>IN</allow>
+          </generaltelephone>
+          <general>
+              <enabled>1</enabled>
+              <otp_type>number</otp_type>
+              <otp_length>4</otp_length>
+              <expire_time>300</expire_time>
+          </general>
+      </cinovic_otplogin>
+  </default>
+</config>

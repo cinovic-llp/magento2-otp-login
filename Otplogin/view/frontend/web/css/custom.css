@@ -1,0 +1,125 @@
+.customer-popup-login .modals-overlay {
+    z-index: 899 !important;
+}
+
+.customer-popup-login .customer-popup-login {
+    display: none;
+}
+
+.customer-popup-login .or-another-selection {
+    display: inline-block;
+    padding-right: 5px;
+}
+
+
+.customer-popup-login .tabs {
+    display: flex;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.customer-popup-login .tabs label {
+    cursor: pointer;
+    display: block;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1em;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.customer-popup-login .modal-popup .modal-header {
+    padding-top: 0rem !important;
+}
+
+.customer-popup-login .tabs .tab {
+    width: 50%;
+}
+
+.customer-popup-otp {
+    display: none;
+}
+
+.modals-overlay {
+    z-index: 899 !important;
+}
+
+.modals-overlay {
+    z-index: 899 !important;
+}
+
+.customer-popup-register {
+    display: none;
+}
+
+.modal-popup .modal-title {
+    border-bottom: none !important;
+}
+
+.form-create-account fieldset,
+.customer-popup-otp fieldset,
+.customer-popup-login fieldset {
+    padding: 20px;
+}
+
+.form-create-account .actions-toolbar,
+.customer-popup-login .actions-toolbar,
+.customer-popup-otp .actions-toolbar {
+    text-align: center;
+    padding-left: 15px !important;
+}
+
+.form-create-account .actions-toolbar .primary,
+.customer-popup-otp .actions-toolbar .primary,
+.customer-popup-login .actions-toolbar .primary {
+    width: 100% !important;
+}
+
+.remind span {
+    float: left;
+    width: 100%;
+    font-size: 15px;
+    color: #012b72;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#customer-popup-forgot {
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (min-width: 767px) {
+    .image img {
+        width: 100%;
+        height: 515px;
+    }
+
+    .image {
+        display: block !important;
+    }
+
+    .col-md-6 {
+        width: 49% !important;
+        float: left;
+        position: relative;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 767px) {
+    .col-md-6 {
+        width: 100% !important;
+    }
+
+    .image {
+        display: none;
+    }
+}
+
+.actions-toolbar .action,
+.actions-toolbar .secondary {
+    width: 100% !important;
+}
