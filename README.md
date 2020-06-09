@@ -19,4 +19,4 @@ Now module is properly installed
 
 # Support
 
-Find us our support policy - https://store.cinovic.com/support.html/
+Find us our support policy - https://cinovic.com/contact/
