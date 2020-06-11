@@ -16,7 +16,10 @@ use Magento\Customer\Model\AccountManagement;
 use Magento\Store\Model\ScopeInterface;
 use \Magento\Framework\Serialize\Serializer\Json;
 
-
+/**
+ * Class Register
+ * @package Cinovic\Whatsapp\Block\Form
+ */
 class Register extends \Magento\Directory\Block\Data
 {
     const COUNTRIES_ALLOWED = 'cinovic_otplogin/generaltelephone/allow';

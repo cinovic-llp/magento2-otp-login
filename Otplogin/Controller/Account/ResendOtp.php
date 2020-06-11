@@ -15,9 +15,19 @@ namespace Cinovic\Otplogin\Controller\Account;
 
 use Magento\Framework\Session\SessionManagerInterface;
 
+/**
+ * Class ResendOtp
+ * @package Cinovic\Otplogin\Controller\Account
+ */
 class ResendOtp extends \Magento\Framework\App\Action\Action
 {
-
+    /**
+     * ResendOtp constructor
+     * @param \Magento\Framework\App\Action\Context                $context        [description]
+     * @param \Magento\Framework\Session\SessionManagerInterface   $session        [description]
+     * @param \Cinovic\Otplogin\Helper\Data                        $helper         [description]
+     * @param \Magento\Framework\Controller\Result\JsonFactory     $resultJsonFactory  [description]
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         SessionManagerInterface $session,
@@ -29,6 +39,10 @@ class ResendOtp extends \Magento\Framework\App\Action\Action
         $this->_sessionManager = $session;
         parent::__construct($context);
     }
+
+    /**
+     * @return PageFactory
+     */
     public function execute()
     {
         //get session

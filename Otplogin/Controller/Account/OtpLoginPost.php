@@ -15,8 +15,21 @@ namespace Cinovic\Otplogin\Controller\Account;
 
 use Magento\Framework\Session\SessionManagerInterface;
 
+/**
+ * Class OtpLoginPost
+ * @package Cinovic\Otplogin\Controller\Account
+ */
 class OtpLoginPost extends \Magento\Framework\App\Action\Action
 {
+
+    /**
+     * OtpLoginPost constructor
+     * @param \Magento\Framework\App\Action\Context                $context            [description]
+     * @param \Magento\Framework\Session\SessionManagerInterface   $session            [description]
+     * @param \Cinovic\Otplogin\Helper\Data                        $helper             [description]
+     * @param \Magento\Framework\Controller\Result\JsonFactory     $resultJsonFactory  [description]
+     * @param \Magento\Customer\Model\ResourceModel\Customer\Collection $collection    [description]    
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         SessionManagerInterface $session,
@@ -30,6 +43,10 @@ class OtpLoginPost extends \Magento\Framework\App\Action\Action
         $this->_sessionManager = $session;
         parent::__construct($context);
     }
+
+    /**
+     * @return PageFactory
+     */
     public function execute()
     {
         $params = $this->getRequest()->getParams();

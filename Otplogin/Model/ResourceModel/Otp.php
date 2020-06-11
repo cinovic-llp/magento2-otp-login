@@ -11,11 +11,13 @@
 
 namespace Cinovic\Otplogin\Model\ResourceModel;
 
+/**
+ * Class Otp
+ * @package Cinovic\Otplogin\Model\ResourceModel
+ */
 class Otp extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
-     * Initialize resource model
-     *
      * @return void
      */
     protected function _construct()
