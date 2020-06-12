@@ -59,6 +59,7 @@ class Register extends \Magento\Directory\Block\Data
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Framework\App\Http\Context $httpContext
      * @param \Magento\Customer\Model\Registration $registration
+     * @param \Magento\Framework\DataObjectFactory $objectFactory
      * @param array $data
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
@@ -76,8 +77,10 @@ class Register extends \Magento\Directory\Block\Data
         Json $jsonHelper,
         \Magento\Framework\App\Http\Context $httpContext,
         \Magento\Customer\Model\Registration $registration,
+        \Magento\Framework\DataObjectFactory $objectFactory,
         array $data = []
     ) {
+        $this->objectFactory = $objectFactory;
         $this->jsonHelper = $jsonHelper;
         $this->moduleManager = $moduleManager;
         $this->customerSession = $customerSession;
@@ -124,7 +127,7 @@ class Register extends \Magento\Directory\Block\Data
         $data = $this->getData('form_data');
         if ($data === null) {
             $formData = $this->customerSession->getCustomerFormData(true);
-            $data = new \Magento\Framework\DataObject();
+            $data = $this->objectFactory->create();
             if ($formData) {
                 $data->addData($formData);
                 $data->setCustomerData(1);

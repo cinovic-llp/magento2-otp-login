@@ -27,6 +27,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const MOBILE_NUMBER = 'cinovic_otplogin/api_configuration/mobile_number';
     const SELLER_ID = 'cinovic_otplogin/api_configuration/sender_id';
     const AUTHORIZATION_KEY = 'cinovic_otplogin/api_configuration/authorization_key';
+    const EXPIRE_TIME = 'cinovic_otplogin/general/expire_time';
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -75,7 +76,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return string
      */
-    public function getOtplenght()
+    public function getOtplength()
     {
         return $this->getConfigvalue(self::OTP_LENGTH);
     }
@@ -107,10 +108,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return string
      */
+    public function getExpiretime()
+    {
+        return $this->getConfigvalue(self::EXPIRE_TIME);
+    }
+
+    /**
+     * @return string
+     */
     public function getOtpcode()
     {
         $otp_type = $this->getOtptype();
-        $otp_length = $this->getOtplenght();
+        $otp_length = $this->getOtplength();
 
         if (empty($otp_length)) {
             $otp_length = 4;

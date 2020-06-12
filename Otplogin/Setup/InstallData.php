@@ -16,52 +16,51 @@ namespace Cinovic\Otplogin\Setup;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Setup\CustomerSetup;
 use Magento\Customer\Setup\CustomerSetupFactory;
-  use Magento\Eav\Model\Entity\Attribute\Set as AttributeSet;
-  use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;
-  use Magento\Framework\Setup\InstallDataInterface;
-  use Magento\Framework\Setup\ModuleContextInterface;
-  use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Eav\Model\Entity\Attribute\Set as AttributeSet;
+use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;
+use Magento\Framework\Setup\InstallDataInterface;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
 
-  /**
-   * Install data
-   * @codeCoverageIgnore
-   */
-  class InstallData implements InstallDataInterface
-  {
+/**
+ * Install data
+ * @codeCoverageIgnore
+ */
+class InstallData implements InstallDataInterface
+{
 
-      /**
-       * CustomerSetupFactory
-       * @var CustomerSetupFactory
-       */
-      protected $customerSetupFactory;
+    /**
+     * CustomerSetupFactory
+     * @var CustomerSetupFactory
+     */
+    protected $customerSetupFactory;
 
-      /**
-       * $attributeSetFactory
-       * @var AttributeSetFactory
-       */
-      private $attributeSetFactory;
+    /**
+     * $attributeSetFactory
+     * @var AttributeSetFactory
+     */
+    private $attributeSetFactory;
 
-      /**
-       * initiate object
-       * @param CustomerSetupFactory $customerSetupFactory
-       * @param AttributeSetFactory $attributeSetFactory
-       */
-      public function __construct(
-          CustomerSetupFactory $customerSetupFactory,
-          AttributeSetFactory $attributeSetFactory
-      )
-      {
-          $this->customerSetupFactory = $customerSetupFactory;
-          $this->attributeSetFactory = $attributeSetFactory;
-      }
+    /**
+     * initiate object
+     * @param CustomerSetupFactory $customerSetupFactory
+     * @param AttributeSetFactory $attributeSetFactory
+     */
+    public function __construct(
+        CustomerSetupFactory $customerSetupFactory,
+        AttributeSetFactory $attributeSetFactory
+    ) {
+        $this->customerSetupFactory = $customerSetupFactory;
+        $this->attributeSetFactory = $attributeSetFactory;
+    }
 
-      /**
-       * install data method
-       * @param ModuleDataSetupInterface $setup
-       * @param ModuleContextInterface $context
-       */
-      public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
-      {
+    /**
+     * install data method
+     * @param ModuleDataSetupInterface $setup
+     * @param ModuleContextInterface $context
+     */
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    {
 
         $setup->startSetup();
         /** @var CustomerSetup $customerSetup */
@@ -77,8 +76,8 @@ use Magento\Customer\Setup\CustomerSetupFactory;
             'is_used_in_grid' => true,
             'is_visible_in_grid' => true,
             'is_filterable_in_grid' => true,
-            'is_searchable_in_grid' => true]
-        );
+            'is_searchable_in_grid' => true
+        ]);
 
         // add attribute to form
         /** @var  $attribute */
@@ -87,6 +86,5 @@ use Magento\Customer\Setup\CustomerSetupFactory;
         $attribute->save();
 
         $setup->endSetup();
-
-      }
-  }
+    }
+}
