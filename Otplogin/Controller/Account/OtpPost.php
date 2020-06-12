@@ -18,9 +18,23 @@ use Magento\Framework\Session\SessionManagerInterface;
 use Cinovic\Otplogin\Model\OtpFactory;
 use PHPUnit\Framework\Constraint\IsTrue;
 
+/**
+ * Class OtpPost
+ * @package Cinovic\Otplogin\Controller\Account
+ */
 class OtpPost extends \Magento\Framework\App\Action\Action
 {
 
+    /**
+     * OtpPost constructor
+     * @param \Magento\Framework\App\Action\Context                $context        [description]
+     * @param \Magento\Customer\Model\CustomerFactory              $customer       [description]
+     * @param \Cinovic\Otplogin\Model\OtpFactory                   $otpFactory     [description]
+     * @param \Magento\Customer\Model\Session                      $session        [description]
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface   $scopeConfig    [description]
+     * @param \Magento\Framework\Controller\Result\JsonFactory     $resultJsonFactory  [description]
+     * @param \Magento\Customer\Model\ResourceModel\Customer\Collection $collection    [description]    
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Customer\Model\CustomerFactory $customer,
@@ -41,6 +55,9 @@ class OtpPost extends \Magento\Framework\App\Action\Action
         return parent::__construct($context);
     }
 
+    /**
+     * @return PageFactory
+     */
     public function execute()
     {
 

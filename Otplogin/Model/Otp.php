@@ -15,10 +15,14 @@ namespace Cinovic\Otplogin\Model;
 
 use Magento\Framework\Model\AbstractModel;
 
+/**
+ * Class Otp
+ * @package Cinovic\Otplogin\Model
+ */
 class Otp extends AbstractModel
 {
     /**
-     * Define resource model
+     * @return void
      */
     protected function _construct()
     {

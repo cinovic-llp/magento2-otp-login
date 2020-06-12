@@ -15,6 +15,10 @@ namespace Cinovic\Otplogin\Block\Form;
 use \Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Model\ScopeInterface;
 
+/**
+ * Class Login
+ * @package Cinovic\Whatsapp\Block\Form
+ */
 class Login extends \Magento\Framework\View\Element\Template
 {
     const COUNTRIES_ALLOWED = 'cinovic_otplogin/generaltelephone/allow';

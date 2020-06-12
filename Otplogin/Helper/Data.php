@@ -15,7 +15,10 @@ namespace Cinovic\Otplogin\Helper;
 
 use Twilio\Rest\Client;
 
-
+/**
+ * Class Data
+ * @package Cinovic\Otplogin\Helper
+ */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
@@ -31,8 +34,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public $storeManager;
 
     /**
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * Data constructor
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface   $scopeConfig    [description]
+     * @param \Magento\Framework\App\Helper\Context                $context        [description]
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager             [description]
+     * @param \Cinovic\Otplogin\Model\OtpFactory                   $otpFactory     [description]
+     * @param \Magento\Customer\Model\ResourceModel\Customer\Collection $collection    [description]    
      */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
@@ -48,36 +55,58 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return parent::__construct($context);
     }
 
+     /**
+     * @param  String $path
+     * @return string
+     */
     public function getConfigvalue($path)
     {
         return $this->scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
+    /**
+     * @return string
+     */
     public function getOtptype()
     {
         return $this->getConfigvalue(self::OTP_TYPE);
     }
 
+    /**
+     * @return string
+     */
     public function getOtplenght()
     {
         return $this->getConfigvalue(self::OTP_LENGTH);
     }
 
+    /**
+     * @return string
+     */
     public function getSmsmobile()
     {
         return $this->getConfigvalue(self::MOBILE_NUMBER);
     }
 
+    /**
+     * @return string
+     */
     public function getSellerId()
     {
         return $this->getConfigvalue(self::SELLER_ID);
     }
 
+    /**
+     * @return string
+     */
     public function getAUthkey()
     {
         return $this->getConfigvalue(self::AUTHORIZATION_KEY);
     }
 
+    /**
+     * @return string
+     */
     public function getOtpcode()
     {
         $otp_type = $this->getOtptype();
@@ -101,6 +130,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $otp_code;
     }
 
+    /**
+     * Send Sms
+     */
     public function getSendotp($otp_code, $mobile_number)
     {
         $number = $this->getSmsmobile();
@@ -115,6 +147,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             );
     }
 
+    /**
+     * Save Otp
+     */
     public function setOtpdata($otp, $mobile_number)
     {
         $question = $this->otpFactory->create();
@@ -124,6 +159,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $question->save();
     }
 
+    /**
+     * Update Otp
+     */
     public function setUpdateotpstatus($mobile_number)
     {
         $customerstatus = $this->otpFactory->create()->getCollection()->addFieldToFilter('customer', $mobile_number)->getData();
