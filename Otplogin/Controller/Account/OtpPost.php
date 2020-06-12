@@ -33,6 +33,7 @@ class OtpPost extends \Magento\Framework\App\Action\Action
      * @param \Magento\Customer\Model\Session                      $session        [description]
      * @param \Magento\Framework\App\Config\ScopeConfigInterface   $scopeConfig    [description]
      * @param \Magento\Framework\Controller\Result\JsonFactory     $resultJsonFactory  [description]
+     * @param \Cinovic\Otplogin\Helper\Data                        $helper             [description]
      * @param \Magento\Customer\Model\ResourceModel\Customer\Collection $collection    [description]    
      */
     public function __construct(
@@ -43,8 +44,10 @@ class OtpPost extends \Magento\Framework\App\Action\Action
         SessionManagerInterface $session,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
+        \Cinovic\Otplogin\Helper\Data $helper,
         \Magento\Customer\Model\ResourceModel\Customer\Collection $collection
     ) {
+        $this->helper = $helper;
         $this->scopeConfig = $scopeConfig;
         $this->collection = $collection;
         $this->resultJsonFactory = $resultJsonFactory;
@@ -73,7 +76,7 @@ class OtpPost extends \Magento\Framework\App\Action\Action
         $status = $this->otpFactory->create()->getCollection()->addFieldToFilter('otp', $otp)->addFieldToSelect('status')->getData();
 
         //config expire time
-        $expiredtime = $this->scopeConfig->getValue("cinovic_otplogin/general/expire_time", \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $expiredtime = $this->helper->getExpiretime();
 
         // check value is empty or not
         if (!empty($otpvalue)) {
