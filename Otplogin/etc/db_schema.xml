@@ -12,12 +12,12 @@
 -->
  <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="mobile_otp" resource="default" engine="innodb" comment="Cinovic Otplogin Table">
-        <column xsi:type="smallint" name="entity_id" padding="6" unsigned="false" identity="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="int" name="entity_id" padding="6" unsigned="false" identity="true" nullable="false" comment="Entity Id"/>
         <column xsi:type="varchar" name="customer" nullable="false" length="255" comment="Customer Mobile"/>
         <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
         <column xsi:type="varchar" name="otp" nullable="false" length="255" comment="Otp"/>
-        <column xsi:type="float" name="status" nullable="false" length="6"  comment="Status"/>
-        <column xsi:type="timestamp" name="created_at" padding="10" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="int" name="status" nullable="false"  comment="Status"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
            <constraint xsi:type="primary" referenceId="PRIMARY">
                 <column name="entity_id"/>
             </constraint>
