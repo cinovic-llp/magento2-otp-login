@@ -1,4 +1,4 @@
-# Magento 2 OTP Login
+# Magento 2 OTP Login - Free
 
 This module is helps to login and register with the OTP.
 
